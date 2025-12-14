@@ -12,13 +12,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                image = docker.build "ludologico/studybuddy:latest"
+                script {
+                    image = docker.build "ludologico/studybuddy:latest"
+                }
             }
         }
         stage('Publish') {
             steps {
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-token') {
-                    image.push("latest")
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-token') {
+                        image.push("latest")
+                    }
                 }
             }
         }
