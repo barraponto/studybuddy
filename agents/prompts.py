@@ -12,8 +12,9 @@ choice_question_template = PromptTemplate.from_template(
 
 fill_question_template = PromptTemplate.from_template(
     """
-    Generate a {difficulty} fill in the blank question about {topic}.
-    The question should be a fill in the blank question with a single blank.
+    Generate a {difficulty} fill in the blank question about topic: {topic}.
+    The question should be a statement about the topic, with a single blank.
+    The blank should be represented by exactly six underscores.
     The answer should be the correct answer.
     """,
 )
