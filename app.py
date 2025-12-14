@@ -45,7 +45,7 @@ if st.session_state.get("submit_quiz"):
     correct_answers = [
         question.answer == answer for question, answer in zip(questions, answers)
     ]
-    st.title(f"You got {len(correct_answers)} out of {len(questions)} correct")
+    st.title(f"You got {sum(correct_answers)} out of {len(questions)} correct")
 
     for question, answer in zip(questions, answers):
         st.write(f"Question: {question.question}")
