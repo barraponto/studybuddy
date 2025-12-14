@@ -10,5 +10,17 @@ pipeline {
                     userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/barraponto/studybuddy.git']])
             }
         }
+        stage('Build') {
+            steps {
+                image = docker.build "ludologico/studybuddy:latest"
+            }
+        }
+        stage('Publish') {
+            steps {
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-token') {
+                    image.push("latest")
+                }
+            }
+        }
     }
 }
