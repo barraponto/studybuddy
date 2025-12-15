@@ -17,16 +17,16 @@ spec:
         app.kubernetes.io/version: "0.1.0"
     spec:
       containers:
-        - name: studybuddy
-          image: docker.io/library/studybuddy:latest
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 8501
-              name: streamlit-app
-              protocol: TCP
-          envFrom:
-            - secretRef:
-                name: studybuddy-secrets
+      - name: studybuddy
+        image: docker.io/library/studybuddy:latest
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 8501
+            name: streamlit-app
+            protocol: TCP
+        envFrom:
+          - secretRef:
+              name: studybuddy-secrets
 ---
 apiVersion: v1
 kind: Service
@@ -35,7 +35,7 @@ metadata:
   labels:
     app.kubernetes.io/name: studybuddy
 spec:
-  type: NodePort # Explicitly set - use LoadBalancer or NodePort for external access
+  type: NodePort  # Explicitly set - use LoadBalancer or NodePort for external access
   selector:
     app.kubernetes.io/name: studybuddy
   ports:
@@ -54,13 +54,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: studybuddy.ludologico.com.br
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: studybuddy-service
-                port:
-                  number: 8501
+  - host: studybuddy.ludologico.com.br
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: studybuddy-service
+            port:
+              number: 8501
