@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_BUILDKIT = '1'
         MINIKUBE_URL = credentials('minikube-url')
-        ARGOCD_PASSWORD = credentials('argocd-password')
     }
 
     stages {
