@@ -72,3 +72,7 @@ elif st.session_state.get("submit"):
             else:
                 format_fill_question(question, index)
         st.form_submit_button("Submit", key="submit_quiz")
+else:
+    st.title(
+        "Learn something new today! Try adding 'modern peruvian history' or 'ansible automation tools' to the topic field."
+    )
