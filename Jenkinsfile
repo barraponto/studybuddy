@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    withCredentials(usernamePassword(credentialsId: 'argocd-admin', usernameVariable: 'ARGOCD_USERNAME', passwordVariable: 'ARGOCD_PASSWORD')) {
+                    withCredentials([usernamePassword(credentialsId: 'argocd-admin', usernameVariable: 'ARGOCD_USERNAME', passwordVariable: 'ARGOCD_PASSWORD')]) {
                         kubeconfig(credentialsId: 'kubeconfig', serverUrl: env.MINIKUBE_URL) {
                             sh '''
                             argocd login argocd.ludologico.com.br:8000 --insecure --username $ARGOCD_USERNAME --password $ARGOCD_PASSWORD
